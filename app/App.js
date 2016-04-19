@@ -4,7 +4,8 @@ import Home from './Home';
 import Repos from './Repos';
 import About from './About';
 import RepoDetails from './RepoDetails';
-import { Router, Route, Link, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, Link, IndexRoute, browserHistory } from 'react-router';
+import ServerError from './ServerError';
 
 class App extends Component {
 	constructor() {
@@ -27,13 +28,14 @@ class App extends Component {
 }
 
 ReactDOM.render((
-		<Router history={hashHistory}>
+		<Router history={browserHistory}>
 			<Route path="/" component={App}>
 				<IndexRoute component={Home} />
 				<Route path="about" component={About} />
 				<Route path="repos" component={Repos}>
-					<Route path="details/:repoName" component={RepoDetails} />
+					<Route path="/repo/:repoName" component={RepoDetails} />
 				</Route>
+				<Route path="error" component={ServerError} />
 			</Route>
 		</Router>
 	), document.getElementById('root'));
